@@ -1,7 +1,8 @@
 <template>
     <label class="notes">
         <span>备注</span>
-        <input type="text" placeholder="请输入备注">
+        <input type="text" v-model="value"
+               placeholder="在这里输入备注">
     </label>
 </template>
 
@@ -11,7 +12,7 @@
 
     @Component
     export default class Notes extends Vue {
-
+        value='';
     }
 </script>
 

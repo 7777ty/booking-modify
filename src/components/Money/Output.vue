@@ -1,7 +1,7 @@
 <template>
     <div class="output">
-        <Icon name="其他"/>
-        <span>￥0</span>
+        <Icon :name="selectedTag"/>
+        <span>￥{{this.$store.state.output}}</span>
     </div>
 </template>
 
@@ -9,7 +9,12 @@
     import Vue from 'vue';
     import {Component} from 'vue-property-decorator';
 
-    @Component
+    @Component({
+        computed:{
+            selectedTag(){
+                return this.$store.state.selectedTag}
+        }
+    })
     export default class Output extends Vue {
 
     }

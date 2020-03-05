@@ -1,20 +1,20 @@
 <template>
     <div class="numberPad">
         <div class="buttons">
-            <button >1</button>
-            <button >2</button>
-            <button >3</button>
-            <button ><Icon name="删除"/></button>
-            <button >4</button>
-            <button >5</button>
-            <button >6</button>
+            <button @click="inputContent">1</button>
+            <button @click="inputContent">2</button>
+            <button @click="inputContent">3</button>
+            <button @click="remove"><Icon name="删除"/></button>
+            <button @click="inputContent">4</button>
+            <button @click="inputContent">5</button>
+            <button @click="inputContent">6</button>
             <button class="OK" >OK</button>
-            <button >7</button>
-            <button >8</button>
-            <button >9</button>
-            <button >清零</button>
-            <button >0</button>
-            <button >.</button>
+            <button @click="inputContent">7</button>
+            <button @click="inputContent">8</button>
+            <button @click="inputContent">9</button>
+            <button @click="clear">清零</button>
+            <button @click="inputContent">0</button>
+            <button @click="inputContent">.</button>
         </div>
     </div>
 </template>
@@ -25,7 +25,15 @@
 
     @Component
     export default class NumberPad extends Vue {
-
+        inputContent(event: MouseEvent){
+            this.$store.commit('inputContent',event);
+        }
+        remove(){
+            this.$store.commit('removeInput',event);
+        }
+        clear(){
+            this.$store.commit('clearInput');
+        }
     }
 </script>
 

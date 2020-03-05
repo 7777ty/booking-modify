@@ -1,7 +1,7 @@
 <template>
     <div class="types">
-        <span class="selected">支出</span>
-        <span>收入</span>
+        <span :class="type ==='-' && 'selected'" @click="selectType('-')">支出</span>
+        <span :class="type ==='+' && 'selected'" @click="selectType('+')">收入</span>
     </div>
 </template>
 
@@ -11,7 +11,15 @@
 
     @Component
     export default class Types extends Vue {
-
+        get type(){
+            return this.$store.state.type;
+        }
+        selectType(type: string){
+            if(type!=='-'&&type!=='+'){
+                throw new Error('type is unknown');
+            }
+            this.$store.commit('selectType',type);
+        }
     }
 </script>
 

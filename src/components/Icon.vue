@@ -1,21 +1,33 @@
 <template>
-  <svg class="icon">
+
+  <svg class="icon" @click="updateTag">
     <use :xlink:href="'#'+name" />
+
   </svg>
+
 </template>
 
 <script lang="ts">
-const importAll = (requireContext: __WebpackModuleApi.RequireContext) =>
-  requireContext.keys().forEach(requireContext);
-try {
-  importAll(require.context("../assets/icons/", true, /\.svg$/));
-} catch (error) {
-  console.log(error);
+  import Vue from 'vue'
+  import {Component, Prop} from 'vue-property-decorator';
+
+@Component
+export default class Icon extends Vue{
+  @Prop() readonly name!: string;
+  beforeCreate(){
+    const importAll = (requireContext: __WebpackModuleApi.RequireContext) =>
+            requireContext.keys().forEach(requireContext);
+    try {
+      importAll(require.context("../assets/icons/", true, /\.svg$/));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  updateTag(){
+    this.$store.commit('updateTag',this.name)
+  }
+
 }
-export default {
-  props: ["name"],
-  name: "Icon"
-};
 </script>
 
 <style lang="scss" scoped>
@@ -26,4 +38,5 @@ export default {
   fill: currentColor;
   overflow: hidden;
 }
+
 </style>
