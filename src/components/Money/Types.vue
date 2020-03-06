@@ -18,8 +18,10 @@
             if(type!=='-'&&type!=='+'){
                 throw new Error('type is unknown');
             }
+
             this.$store.commit('selectType',type);
         }
+
     }
 </script>
 

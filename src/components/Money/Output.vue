@@ -12,7 +12,8 @@
     @Component({
         computed:{
             selectedTag(){
-                return this.$store.state.selectedTag}
+                return this.$store.state.selectedTag
+            }
         }
     })
     export default class Output extends Vue {

@@ -1,15 +1,36 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import clone from '@/lib/clone';
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store= new Vuex.Store({
     state: {
         output:'0',
         selectedTag:'其他',
-        type:'-'
+        type:'-',
+        notes:'',
+        recordList : [],
     }as RootState,
     mutations: {
+        //record
+        createRecord(state) {
+            const record: recordItem={tag:state.selectedTag,notes:state.notes,type:state.type,amount:parseFloat( state.output)};
+            const record2: recordItem = clone(record);
+            record2.createAt = new Date().toISOString();
+            state.recordList.push(record2);
+            store.commit('saveRecords')
+        },
+        fetchRecords(state) {
+            state.recordList =JSON.parse(window.localStorage.getItem('recordList') || '[]') as recordItem[];
+        },
+        saveRecords(state) {
+            window.localStorage.setItem('recordList',
+                JSON.stringify(state.recordList));
+            state.output='0';
+            state.notes='';
+        },
+
         //numberPad
         inputContent(state, event: MouseEvent) {
             const button = (event.target as HTMLButtonElement);
@@ -57,3 +78,5 @@ export default new Vuex.Store({
         }
     }
     });
+
+export default store;

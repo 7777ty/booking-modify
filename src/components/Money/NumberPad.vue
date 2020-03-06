@@ -8,7 +8,7 @@
             <button @click="inputContent">4</button>
             <button @click="inputContent">5</button>
             <button @click="inputContent">6</button>
-            <button class="OK" >OK</button>
+            <button class="OK" @click="OK">OK</button>
             <button @click="inputContent">7</button>
             <button @click="inputContent">8</button>
             <button @click="inputContent">9</button>
@@ -29,10 +29,13 @@
             this.$store.commit('inputContent',event);
         }
         remove(){
-            this.$store.commit('removeInput',event);
+            this.$store.commit('removeInput');
         }
         clear(){
             this.$store.commit('clearInput');
+        }
+        OK(){
+            this.$emit('submit')
         }
     }
 </script>

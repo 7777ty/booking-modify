@@ -3,8 +3,9 @@
     <Types/>
         <Output/>
         <Tags/>
+
         <Notes/>
-        <NumberPad/>
+        <NumberPad @submit="saveRecord"/>
     </Layout>
 </template>
 
@@ -21,7 +22,14 @@
         components: {NumberPad, Notes, Tags, Output, Types}
     })
     export default class Money extends Vue {
+        record: recordItem={
+            tag:'',notes:'',type:'-',amount:0
+        };
 
+        saveRecord(){
+            this.$store.commit('createRecord');
+
+        }
     }
 </script>
 
