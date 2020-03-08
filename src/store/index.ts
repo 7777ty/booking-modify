@@ -12,6 +12,8 @@ const store= new Vuex.Store({
         notes:'',
         recordList : [],
         budget :null,
+        payTags:['其他','餐饮','交通','购物','服饰','日用','娱乐','食材','零食','烟酒','学习','医疗','住房','水电','通讯','红包','借出'],
+        incomeTags:['其他','薪资','奖金','借入','收债','利息','回收','投资']
     }as RootState,
     mutations: {
         //budget
@@ -82,8 +84,9 @@ const store= new Vuex.Store({
 
         //tag
         updateTag(state,name: string){
-            state.selectedTag=name;
-
+            if(state.payTags.indexOf(name)>=0||state.incomeTags.indexOf(name)>=0){
+                state.selectedTag=name;
+            }
         },
 
         // type
@@ -92,6 +95,9 @@ const store= new Vuex.Store({
                 throw new Error('type is unknown');
             }
             state.type=type;
+            if((state.type==='+'&&state.payTags.indexOf(state.selectedTag)>=0)||(state.type==='-'&&state.incomeTags.indexOf(state.selectedTag)>=0)){
+                state.selectedTag='其他';
+            }
         }
     }
     });

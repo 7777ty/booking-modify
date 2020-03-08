@@ -5,6 +5,8 @@ type RootState={
     notes: string;
     recordList: recordItem[];
     budget: number|null;
+    payTags: tags;
+    incomeTags: tags;
 }
 type recordItem={
     tag: string;
@@ -13,4 +15,4 @@ type recordItem={
     amount: number;
     createAt?: string;
 }
-
+type tags=string[]

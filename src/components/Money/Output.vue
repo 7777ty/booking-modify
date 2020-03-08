@@ -17,7 +17,9 @@
         }
     })
     export default class Output extends Vue {
-
+        beforeCreate(){
+            this.$store.state.selected='其他';
+        }
     }
 </script>
 
