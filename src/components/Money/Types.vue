@@ -32,6 +32,7 @@
         text-align: center;
         font-size: 18px;
         justify-content: center;
+        font-weight: 500;
         > span {
             width: 10%;
             height: 48px;

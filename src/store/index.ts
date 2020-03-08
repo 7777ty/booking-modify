@@ -11,8 +11,25 @@ const store= new Vuex.Store({
         type:'-',
         notes:'',
         recordList : [],
+        budget :null,
     }as RootState,
     mutations: {
+        //budget
+        removeBudget(state){
+            state.budget=null;
+            store.commit('saveBudget');
+        },
+        fetchBudget(state){
+            state.budget =JSON.parse(window.localStorage.getItem('budget') || '0');
+        },
+        createBudget(state,money: number) {
+            state.budget=money;
+            store.commit('saveBudget');
+        },
+        saveBudget(state){
+            window.localStorage.setItem('budget',JSON.stringify(state.budget));
+        },
+
         //record
         createRecord(state) {
             const record: recordItem={tag:state.selectedTag,notes:state.notes,type:state.type,amount:parseFloat( state.output)};

@@ -4,6 +4,7 @@ type RootState={
     type: string;
     notes: string;
     recordList: recordItem[];
+    budget: number|null;
 }
 type recordItem={
     tag: string;
