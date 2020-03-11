@@ -151,6 +151,7 @@
     ol{
         display: flex;
         flex-direction: column-reverse;
+
     }
     li{
         background:#FFFFFF;
