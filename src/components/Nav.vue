@@ -26,10 +26,10 @@ nav {
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
   flex-direction: row;
   font-size: 12px;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-  background: #f5f5f5;
+  /*position: fixed;*/
+  /*width: 100%;*/
+  /*bottom: 0;*/
+  /*background: #f5f5f5;*/
   > .item {
     padding: 2px 0;
     width: 33.33333%;

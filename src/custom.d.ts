@@ -14,5 +14,6 @@ type recordItem={
     type: string;
     amount: number;
     createAt?: string;
+    id: string|null;
 }
 type tags=string[]

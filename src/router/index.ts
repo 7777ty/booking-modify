@@ -4,6 +4,7 @@ import NotFound from '@/views/NotFound.vue';
 import Money from '@/views/Money.vue';
 import General from '@/views/General.vue';
 import Chart from '@/views/Chart.vue';
+import EditRecord from '@/views/EditRecord.vue';
 
 
 Vue.use(VueRouter);
@@ -24,6 +25,10 @@ const routes = [
   {
     path: '/chart',
     component: Chart
+  },
+  {
+    path: '/general/edit/:id',
+    component: EditRecord
   },
     {
         path: '*',

@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import clone from '@/lib/clone';
+import createId from '@/lib/idCreator';
 
 Vue.use(Vuex);
 
@@ -34,9 +35,10 @@ const store= new Vuex.Store({
 
         //record
         createRecord(state) {
-            const record: recordItem={tag:state.selectedTag,notes:state.notes,type:state.type,amount:parseFloat( state.output)};
+            const record: recordItem={id:null,tag:state.selectedTag,notes:state.notes,type:state.type,amount:parseFloat( state.output)};
             const record2: recordItem = clone(record);
             record2.createAt = new Date().toISOString();
+            record2.id=createId().toString();
             state.recordList.push(record2);
             store.commit('saveRecords')
         },

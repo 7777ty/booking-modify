@@ -23,7 +23,7 @@
     })
     export default class Money extends Vue {
         record: recordItem={
-            tag:'',notes:'',type:'-',amount:0
+           id:null,tag:'',notes:'',type:'-',amount:0
         };
 
         saveRecord(){

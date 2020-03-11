@@ -24,13 +24,13 @@
             <span>今日支出<a>￥{{result('-','day')}}</a></span>
             <span>今日收入<a>￥{{result('+','day')}}</a></span>
         </div>
-        <ol >
-        <li v-for="item in recordList" :key="item.createAt">
+        <div class="records">
+        <router-link class="record" v-for="item in recordList" :key="item.createAt" :to="`general/edit/${item.id}`">
             <Icon :name="item.tag"/>
             <span class="icon-span">{{item.tag}}<span>{{item.notes}}</span></span>
             <span class="amount"><span >￥{{item.type}}{{item.amount}}</span>{{beautify(item.createAt)}}</span>
-        </li>
-        </ol>
+        </router-link>
+        </div>
     </Layout>
 </template>
 
@@ -95,7 +95,6 @@
 
 <style lang='scss' scoped>
     @import "~@/assets/styles/helper.scss";
-
     .title {
         background: #e8e8e8;
         font-size: 18px;
@@ -148,12 +147,12 @@
             padding-right: 8px;
         }
     }
-    ol{
+    .records{
         display: flex;
         flex-direction: column-reverse;
 
     }
-    li{
+    .record{
         background:#FFFFFF;
         margin: 4px 12px;
         padding: 10px 8px;
