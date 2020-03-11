@@ -22,7 +22,7 @@ const routes = [
       component: General
     },
   {
-  path: '/chart',
+    path: '/chart',
     component: Chart
   },
     {

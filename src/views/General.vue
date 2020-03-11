@@ -25,7 +25,7 @@
             <span>今日收入<a>￥{{result('+','day')}}</a></span>
         </div>
         <ol >
-        <li v-for="item in recordList" :key="item">
+        <li v-for="item in recordList" :key="item.createAt">
             <Icon :name="item.tag"/>
             <span class="icon-span">{{item.tag}}<span>{{item.notes}}</span></span>
             <span class="amount"><span >￥{{item.type}}{{item.amount}}</span>{{beautify(item.createAt)}}</span>
@@ -40,6 +40,7 @@
     import clone from '@/lib/clone';
     import dayjs from 'dayjs';
     import Button from '@/components/Button.vue';
+
     @Component({
         components: {Button}
     })
@@ -48,16 +49,22 @@
             return (this.$store.state as RootState).recordList;
         }
         result(type: string, time: string){
-            let total=0;
+            let daily=0;
+            let monthly=0;
             const now = dayjs();
             const {recordList} = this;
             const newList=clone(recordList).filter(r=>r.type===type);
             for(let i=0;i<newList.length;i++){
-                if(now.isSame(dayjs(newList[i].createAt),time)){
-                    total+=newList[i].amount;
+                if(now.isSame(dayjs(newList[i].createAt),'day')){
+                    daily+=newList[i].amount;
+                }
+                if(now.isSame(dayjs(newList[i].createAt),'month')){
+                    monthly+=newList[i].amount;
                 }
             }
-            return total;
+            if(time==='day'){return daily;}
+            if(time==='month'){return monthly;}
+
         }
         beautify(string: string) {
             const day = dayjs(string);
@@ -65,7 +72,6 @@
             if (day.isSame(now, 'day')) {
                 return '今天  '+day.format('HH:mm');
             } else if (day.isSame(now.subtract(1, 'day'), 'day')) {
-                console.log('hi');
                 return '昨天  '+day.format('HH:mm');
             } else if (day.isSame(now.subtract(2, 'day'), 'day')) {
                 return '前天  '+day.format('HH:mm');
@@ -148,7 +154,7 @@
     }
     li{
         background:#FFFFFF;
-        margin: 8px 12px;
+        margin: 4px 12px;
         padding: 10px 8px;
         display: flex;
         justify-content: space-between;

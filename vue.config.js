@@ -1,9 +1,14 @@
 
-const path = require('path')
+const path = require('path');
 
 module.exports = {
+
+  transpileDependencies: [
+    'vue-echarts',
+    'resize-detector'
+  ],
   chainWebpack: config => {
-    const icons = path.resolve(__dirname, 'src', 'assets', 'icons')
+    const icons = path.resolve(__dirname, 'src', 'assets', 'icons');
     // 配置loader
     config.module
         .rule('svg-sprite')
@@ -18,5 +23,7 @@ module.exports = {
         .exclude.add(icons)
     // 配置plugin
     config.plugin('svg-sprite').use(require('svg-sprite-loader/plugin'), [{plainSprite: true}])
-  }
-} 
+  },
+
+
+};

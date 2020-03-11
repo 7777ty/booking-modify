@@ -86,6 +86,7 @@ const store= new Vuex.Store({
         updateTag(state,name: string){
             if(state.payTags.indexOf(name)>=0||state.incomeTags.indexOf(name)>=0){
                 state.selectedTag=name;
+
             }
         },
 
