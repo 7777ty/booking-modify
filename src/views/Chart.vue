@@ -8,12 +8,12 @@
         </div>
         <Types class="type" />
         <div >
-            <v-chart  v-if="this.$store.state.type==='-'"  class="v-chart"  :options="bar1" ></v-chart>
-            <v-chart  v-else-if="this.$store.state.type==='+'"  class="v-chart"  :options="bar2" ></v-chart>
+            <v-chart  v-if="this.$store.state.type==='-'"  class="v-chart-bar"  :options="bar1" ></v-chart>
+            <v-chart  v-else-if="this.$store.state.type==='+'"  class="v-chart-bar"  :options="bar2" ></v-chart>
         </div>
         <div>
-            <v-chart v-if="this.$store.state.type==='-'" class="v-chart"  :options="pie1" ></v-chart>
-            <v-chart v-if="this.$store.state.type==='+'" class="v-chart"  :options="pie2" ></v-chart>
+            <v-chart v-if="this.$store.state.type==='-'" class="v-chart-pie"  :options="pie1" ></v-chart>
+            <v-chart v-if="this.$store.state.type==='+'" class="v-chart-pie"  :options="pie2" ></v-chart>
         </div>
 
     </Layout>
@@ -40,9 +40,7 @@
         },
 
         data: function() {
-
             return {
-
                 bar1: {
                             grid: {
                                 x: 15,
@@ -197,15 +195,17 @@
                         }
                     ],
                 },
-
                 pie1: {
-
             series: [
                 {
-
+                    center: ['50%', '50%'],
                     type: 'pie',//图形类型，如饼状图，柱状图等
                     radius: ['35%', '65%'],//饼图的半径，数组的第一项是内半径，第二项是外半径。支持百分比，本例设置成环形图。具体可以看文档或改变其值试一试
                     //roseType:'area',是否显示成南丁格尔图，默认false
+                    labelLine:{
+                        normal:{
+                            length:5,
+                        }},
                     itemStyle: {
                         normal:{
                             label:{
@@ -214,10 +214,7 @@
                                 formatter:function(val){   //让series 中的文字进行换行
                                     return val.name.split("-").join("\n");}
                             },//饼图图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。可以与itemStyle属性同级，具体看文档
-                            labelLine:{
-                                show:true,
-                                lineStyle:{color:'#3c4858'}
-                            }//线条颜色
+                            //线条颜色
                         },//基本样式
                         emphasis: {
                             shadowBlur: 10,
@@ -274,26 +271,25 @@
             pieData(type){
                 const amount=this.billDetail('amount',type);
                 let i,j,value=0;
-                console.log(amount);
                 const result=[];
                 const recordList = this.$store.state.recordList;
                 const newList=clone(recordList).filter(r=>r.type===type);
-                console.log(newList);
-                let name=newList[0].tag;
-                console.log(name);
-                for(i=0;i<newList.length;i++){
-                    if(newList[i].tag===name&&i!==newList.length-1){
-                    value+=newList[i].amount;
-                } else {
-                    value+=newList[i].amount;
+                let name='';
+                for(i=0;i<newList.length;){
+                    name=newList[i].tag;
+                    for (j=0;j<newList.length;){
+
+                        if(newList[j].tag===name){
+                            value+=newList[j].amount;
+                            newList.splice(j,1);
+                        }else {
+                            j++;
+                        }
+                    }
                     value=(value/amount*100).toFixed(2);
-                        console.log(value);
                     name=value.toString()+'%'+'-'+name;
                     result.push({name,value});
-                    j=i;
                     value=0;
-                    name=newList[j].tag;
-                }
                 }
                 return result;
             },
@@ -348,8 +344,12 @@
                 }
 
              if(name==='day'){
+                 console.log(day);
                  return day;}
-             if(name==='amounts'){ return amounts;}
+             if(name==='amounts'){
+                 console.log(amounts);
+
+                 return amounts;}
           },
     },
 
@@ -363,10 +363,18 @@
 </script>
 
 <style lang="scss" scoped>
-    .v-chart{
+    .v-chart-bar{
         background: #FFFFFF;
         width: 100%;
         height: 200px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+
+    }
+    .v-chart-pie{
+        background: #FFFFFF;
+        width: 100%;
+        height: 250px;
         margin-top: 10px;
         margin-bottom: 20px;
 

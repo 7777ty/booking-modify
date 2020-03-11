@@ -1,14 +1,16 @@
 
-const path = require('path');
+const path = require('path')
 
 module.exports = {
-
+  publicPath: process.env.NODE_ENV === 'production'
+      ? '/booking-modify/'
+      : '/',
   transpileDependencies: [
     'vue-echarts',
     'resize-detector'
   ],
   chainWebpack: config => {
-    const icons = path.resolve(__dirname, 'src', 'assets', 'icons');
+    const icons = path.resolve(__dirname, 'src', 'assets', 'icons')
     // 配置loader
     config.module
         .rule('svg-sprite')
