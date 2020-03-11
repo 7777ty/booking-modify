@@ -26,7 +26,7 @@ const routes = [
     component: Chart
   },
     {
-        path: '/notfound',
+        path: '*',
         component: NotFound
     },
 ];
