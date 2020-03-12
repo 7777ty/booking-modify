@@ -23,3 +23,17 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app');
+
+if(document.documentElement.clientWidth>500){
+  window.alert('请使用手机打开本页面，以保证显示效果');
+  const img=document.createElement('img');
+  img.src='../qrcode.png';
+  img.style.position='fixed';
+  img.style.left='50%';
+  img.style.top='50%';
+  img.style.transform='translate(-50%,-50%)';
+  img.style.boxShadow='0 0 10px rgba(0,0,0,0.25)';
+  img.style.width='50%';
+  img.style.height='width';
+  document.body.appendChild(img)
+}
