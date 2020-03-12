@@ -14,11 +14,14 @@
 
 <style lang='scss' scoped>
     .button {
-        background: #fff;
-        color: #c5c5c5;
+        background: #008000;
+        color: #FFFFFF;
+        font-size: 18px;
         border-radius: 4px;
         border: none;
         padding-left: 5px;
+        width: 70px;
+        height: 40px;
         &-wrapper {
             text-align: center;
             padding: 16px;

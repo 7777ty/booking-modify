@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import clone from '@/lib/clone';
 import createId from '@/lib/idCreator';
+import router from '@/router';
 
 Vue.use(Vuex);
 
@@ -50,6 +51,35 @@ const store= new Vuex.Store({
                 JSON.stringify(state.recordList));
             state.output='0';
             state.notes='';
+        },
+        updateRecord(state,payload){
+            const {id,notes,amount}=payload;
+
+            const idList=state.recordList.map(item=>item.id);
+            if(idList.indexOf(id)>=0){
+                const record=state.recordList.filter(item=>item.id===id)[0];
+                record.notes=notes;
+                record.amount=amount;
+                store.commit('saveRecords');
+            }
+        },
+        removeRecord(state,id: string){
+            let index = -1;
+            for (let i = 0; i < state.recordList.length; i++) {
+                if (state.recordList[i].id === id) {
+                    index = i;
+                    break;
+                }
+            }
+                if(index>=0){
+                    state.recordList.splice(index, 1);
+                    store.commit('saveRecords');
+                    router.back();
+                }else {
+                    window.alert('删除失败');
+                }
+
+                store.commit('saveRecords');
         },
 
         //numberPad

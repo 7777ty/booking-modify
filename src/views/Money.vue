@@ -4,7 +4,7 @@
         <Output/>
         <Tags/>
 
-        <Notes/>
+        <FormItem field-name="备注" placeholder="在这里输入备注"/>
         <NumberPad @submit="saveRecord"/>
     </Layout>
 </template>
@@ -15,11 +15,11 @@
     import Types from '@/components/Money/Types.vue';
     import Output from '@/components/Money/Output.vue';
     import Tags from '@/components/Money/Tags.vue';
-    import Notes from '@/components/Money/Notes.vue';
     import NumberPad from '@/components/Money/NumberPad.vue';
+    import FormItem from '@/components/Money/FormItem.vue';
 
     @Component({
-        components: {NumberPad, Notes, Tags, Output, Types}
+        components: {FormItem, NumberPad, Tags, Output, Types}
     })
     export default class Money extends Vue {
         record: recordItem={

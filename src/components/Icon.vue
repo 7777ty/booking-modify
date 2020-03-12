@@ -1,6 +1,6 @@
 <template>
 
-  <svg class="icon" @click="updateTag">
+  <svg class="icon" @click="updateTag ">
     <use :xlink:href="'#'+name" />
 
   </svg>
