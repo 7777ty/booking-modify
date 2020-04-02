@@ -48,6 +48,7 @@
         span{
             display: flex;
             flex-direction: column;
+
             margin:10px 20px;
         };
     }

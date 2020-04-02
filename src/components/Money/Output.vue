@@ -1,6 +1,6 @@
 <template>
     <div class="output">
-        <Icon :name="selectedTag"/>
+        <Icon :name="selectedTag" :class="selectedType"/>
         <span>￥{{this.$store.state.output}}</span>
     </div>
 </template>
@@ -13,13 +13,23 @@
         computed:{
             selectedTag(){
                 return this.$store.state.selectedTag
+            },
+            selectedType(){
+                if(this.$store.state.type=='-'){
+                    return 'payColor'
+                }else {
+                    return 'incomeColor'
+                }
+
             }
         }
     })
     export default class Output extends Vue {
         beforeCreate(){
             this.$store.state.selected='其他';
+
         }
+
     }
 </script>
 
@@ -35,6 +45,12 @@
         .icon {
             width: 32px;
             height: 32px;
+        }
+    .payColor{
+        color:#FD6B71
+    }
+        .incomeColor{
+            color:#5FA0FA
         }
     }
 </style>

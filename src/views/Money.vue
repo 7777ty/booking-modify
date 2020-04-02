@@ -2,7 +2,7 @@
     <Layout>
     <Types/>
         <Output/>
-        <Tags/>
+        <Tags class="tags"/>
 
         <FormItem field-name="备注" placeholder="在这里输入备注"/>
         <NumberPad @submit="saveRecord"/>
@@ -39,5 +39,8 @@
         display: flex;
         flex-direction: column;
 
+    }
+    .tags{
+        padding-left: 35px;
     }
 </style>
